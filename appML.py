@@ -9,7 +9,7 @@ class Application:
     def __init__(self, output_path = "./"):
         """ Initialize application which uses OpenCV + Tkinter. It displays
             a video stream in a Tkinter window and stores current snapshot on disk """
-        self.vs = cv2.VideoCapture(r'E:\NAMHOC\python\highway.mp4') # capture video frames, 0 is your default video camera\
+        self.vs = cv2.VideoCapture(r'C:\NAMHOC\python\python_ML\.video\video3.mp4') # capture video frames, 0 is your default video camera\
 
         self.output_path = output_path  # store output path
         self.current_image = None  # current image from the camera
@@ -49,11 +49,6 @@ class Application:
         p = os.path.join(self.output_path, filename)  # construct output path
         self.current_image.save(p, "JPEG")  # save image as jpeg file
         print("[INFO] saved {}".format(filename))
-
-    def imgprocess(self):
-        """detect plate recognize number plate"""
-        import plate
-        data, img, invert=self.recognize(current_image)
               
     def destructor(self):
         """ Destroy the root object and release all resources """
