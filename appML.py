@@ -5,11 +5,14 @@ import datetime
 import cv2
 import os
 
+from cv2 import invert
+import plate
+
 class Application:
     def __init__(self, output_path = "./"):
         """ Initialize application which uses OpenCV + Tkinter. It displays
             a video stream in a Tkinter window and stores current snapshot on disk """
-        self.vs = cv2.VideoCapture(r'C:\NAMHOC\python\python_ML\.video\video3.mp4') # capture video frames, 0 is your default video camera\
+        self.vs = cv2.VideoCapture(r'C:\NAMHOC\python\python_ML\.video\convert.mp4') # capture video frames, 0 is your default video camera\
 
         self.output_path = output_path  # store output path
         self.current_image = None  # current image from the camera
@@ -35,7 +38,11 @@ class Application:
         ok, frame = self.vs.read()  # read frame from video stream
         if ok:  # frame captured without any errors
             cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # convert colors from BGR to RGBA
-            
+            # invert = plate.recognize(cv2image)
+            # self.invert = Image.fromarray(invert)
+            # cut_imgtk = ImageTk.PhotoImage(image=self.invert)
+            # self.panel.cut_imgtk = cut_imgtk
+            # self.panel.config(image=cut_imgtk)
             self.current_image = Image.fromarray(cv2image)  # convert image for PIL
             imgtk = ImageTk.PhotoImage(image=self.current_image)  # convert image for tkinter
             self.panel.imgtk = imgtk  # anchor imgtk so it does not be deleted by garbage-collector
